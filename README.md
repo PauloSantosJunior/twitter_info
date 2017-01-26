@@ -2,7 +2,6 @@
 This is just a test for a recruitment.
 
 
-# Gympass recruiting test
 In this test you should:
 - Create users using an existing Twitter account
 - Login using a Twitter account
