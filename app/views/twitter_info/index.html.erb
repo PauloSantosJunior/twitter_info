@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Twitter Informations</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_Ria9irjOyAkC_vbDZx2l4zi5JVk6K5g" async defer></script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse twitter-nav-bar">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <h4 class="white-text"> @<%= @twitter_user.screen_name%> </h4>
+    </nav>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3"><%= @twitter_user.name%></h1>
+
+        <h2 class="form-signin-heading">Dados da Conta</h2>
+
+        <!-- Inicio credenciais-->
+        <p>Nome do usuário: <%= @user.name%></p>
+        <!-- Fim credenciais -->
+
+        <!-- Inicio endereço-->
+        <p>CEP: <%= @user.postal_code%></p>
+
+        <p>Logradouro: <%= @user.street_name%></p>
+
+        <p>Cidade: <%= @user.city_name%></p>
+
+
+        <p>Estado: <%= @user.state_name%></p>
+
+        <p>País: <%= @user.country_name%></p>
+
+
+        <!-- Fim endereço-->
+
+        <!-- inicio informações contato-->
+        <p>Telefone: <%= @user.telephone%></p>
+
+        <p>E-mail: <%= @user.email%></p>
+
+        <hr />
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <input size="16" id="start_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
+            <input size="16" id="end_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
+            <input id="search_string" class="form-control mr-sm-10" type="text" placeholder="Search">
+            <button class="btn btn-success my-2 my-sm-0" onclick="get_search_result()">Tweets Search</button>
+        </div>
+      </div>
+
+      <hr>
+
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" id="search-results">
+        </div>
+      </div>
+
+      <hr>
+
+    </div>
+    <div class="container">
+       <h1>Tweets próximo a você!</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <script>
+                function show_map(position) {
+                  var latitude = position.coords.latitude;
+                  var longitude = position.coords.longitude;
+                  // Create a map object and specify the DOM element for display.
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: latitude, lng: longitude},
+                    scrollwheel: true,
+                    zoom: 16
+                  });
+                  var contentString = '<div id="content"> teste'+
+                   "</div>";
+                  var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+
+                  var marker = new google.maps.Marker({
+                    position: {lat: latitude, lng: longitude},
+                    map: map,
+                    label: "ALOW",
+                    icon: "",
+                    draggable: true,
+                    title: 'Hello World!'
+                  });
+                  marker.addListener('click', function() {
+                     infowindow.open(map, marker);
+                   });
+
+                  google.maps.event.addListener(marker, 'dragend', function(evt){
+                    get_geo_tweets(evt.latLng.lat()+','+evt.latLng.lng());
+                    infowindow.setOptions({
+
+                        content: '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>'
+                    });
+                    infowindow.open(map, marker);
+                  });
+
+                  google.maps.event.addListener(marker, 'drag', function(evt){
+                      console.log("marker is being dragged");
+                  });
+
+                }
+
+                navigator.geolocation.getCurrentPosition(show_map);
+
+
+            </script>
+            <div style="width:1000px; height:800px;">
+                <div id="map" style="width: 100%; height: 100%"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
+<script>
+  function get_search_result(){
+    $.get('/twitter_info/twitter_search?search_string='+$("#search_string").val().replace('#', "%23")+"&start_date="+$("#start_date").val()+"&end_date="+$("#end_date").val(), function(data) {
+        $("#search-results").html(data);
+     });
+  }
+  function get_geo_tweets(coordinates){
+    $.get('/twitter_info/twitter_geo_location?coordinates='+coordinates, function(data) {
+      alert(data);
+     });
+  }
+  $(".form_datetime").datetimepicker({format: 'YYYY-MM-DD'});
+</script>

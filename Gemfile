@@ -7,6 +7,18 @@ end
 
 ruby '2.4.0'
 
+#twitter gems
+gem 'omniauth-twitter'
+gem 'rails-assets-tether'
+gem 'twitter'
+gem 'twitter-text'
+#googlemaps api
+gem 'google_maps_service'
+#bootstrap
+gem 'bootstrap'
+#datetimepicker
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
 # Use postgresql as the database for Active Record

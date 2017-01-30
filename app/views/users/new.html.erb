@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitter Informations</title>
+  </head>
+	<body>
+    <div class="container">
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+          <div class="row main">
+            <div class="cols-sm-10">
+              <div class="panel-heading">
+                 <div class="panel-title text-center">
+                    <h1 class="title">Twitter Informations</h1>
+                    <hr />
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <%= form_tag({controller: :users, action: :create}, {class: "form-signin", method: :get} ) do %>
+
+            <h2 class="form-signin-heading">Nova Conta</h2>
+
+            <!-- Inicio credenciais-->
+            <label for="inputUserName" class="sr-only">Nome do Usuário</label>
+            <input name="inputUserName" class="form-control" placeholder="Nome do Usuário" required="" autofocus="">
+
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" name="inputPassword" class="form-control" placeholder="Senha" required="">
+            <!-- Fim credenciais -->
+
+            <!-- Inicio endereço-->
+            <label for="inputPostal" type="text" class="sr-only">CEP</label>
+            <input type="text" name="inputPostal" class="form-control" placeholder="CEP" required="">
+
+            <label for="inputStreet" type="text" class="sr-only">Logradouro</label>
+            <input type="text" name="inputStreet" class="form-control" placeholder="Rua" required="">
+
+            <label for="inputCity" type="text" class="sr-only">Cidade</label>
+            <input type="text" name="inputCity" class="form-control" placeholder="Cidade" required="">
+
+            <label for="inputState" class="sr-only">Estado</label>
+            <input type="text" name="inputState" class="form-control" placeholder="Estado" required="">
+
+            <label for="inputCountry" class="sr-only">País</label>
+            <input type="text" name="inputCountry" class="form-control" placeholder="País" required="">
+
+            <!-- Fim endereço-->
+
+            <!-- inicio informações contato-->
+            <label for="inputTel" class="sr-only">Telefone</label>
+            <input type="text" name="inputTel" class="form-control" placeholder="Telefone" required="">
+
+            <label for="inputEmail" class="sr-only">E-mail</label>
+            <input type="email" name="inputEmail" class="form-control" placeholder="E-mail" required="">
+              <!-- Fim informações contato-->
+            <hr />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+
+
+	</body>
+</html>

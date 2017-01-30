@@ -1,0 +1,35 @@
+<%tweets.take(10).each do |tweet|%>
+  <div class="content">
+    <div class="stream-item-header">
+      <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="<%=tweet.user.url%>" data-user-id="18938394">
+        <img class="avatar js-action-profile-avatar" src="<%=tweet.user.profile_image_url%>" alt="">
+        <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part=""><%= tweet.user.name%></strong>
+        <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part="">@<b><%= tweet.user.screen_name%></b></span>
+      </a>
+      <br/>
+      <span class="username js-action-profile-name" data-aria-label-part=""><b><%="Localização: #{tweet.user.location}" if not tweet.user.location.blank?%></b></span>
+    </div>
+
+    <div class="js-tweet-text-container">
+      <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="pt" data-aria-label-part="0">
+        <%= tweet.text%>
+        <%Twitter::Extractor.extract_urls(tweet.text).each do |uri|%>
+          <a href="<%=uri%>" class="twitter-timeline-link u-hidden" data-pre-embedded="true" dir="ltr"><%=uri%></a>
+        <%end%>
+      </p>
+    </div>
+    <%if tweet.media? %>
+        <div class="AdaptiveMedia is-square">
+          <div class="AdaptiveMedia-container js-adaptive-media-container">
+            <div class="AdaptiveMedia-singlePhoto">
+              <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="<%=tweet.media[0].media_url%>" data-element-context="platform_photo_card">
+                <img data-aria-label-part="" src="<%=tweet.media[0].media_url%>" alt="" style="width: 30%; height:30%; top: -0px;">
+              </div>
+            </div>
+          </div>
+        </div>
+    <%end%>
+
+  </div>
+  <hr>
+<% end %>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitter Informations</title>
+  </head>
+	<body>
+    <div class="container">
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+          <div class="row main">
+            <div class="cols-sm-10">
+              <div class="panel-heading">
+                 <div class="panel-title text-center">
+                    <h1 class="title">Twitter Informations</h1>
+                    <hr />
+                  </div>
+              </div>
+            </div>
+          </div>
+          <%= form_tag({controller: "sessions", action: "create"}, {class: "form-signin", method: :put} ) do %>
+
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="inputUserName" class="sr-only">Email address</label>
+            <input id="inputUserName" class="form-control" placeholder="User name" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+
+
+	</body>
+</html>

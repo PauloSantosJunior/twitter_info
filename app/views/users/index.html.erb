@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitter Informations</title>
+  </head>
+	<body>
+    <div class="container">
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+          <div class="row main">
+            <div class="cols-sm-10">
+              <div class="panel-heading">
+                 <div class="panel-title text-center">
+                    <h1 class="title">Twitter Informations</h1>
+                    <hr />
+                  </div>
+              </div>
+            </div>
+          </div>
+            <%= form_tag({controller: :users, action: :login}, {class: "form-signin", method: :get} ) do %>
+
+            <h2 class="form-signin-heading">Login</h2>
+
+            <!-- Inicio credenciais-->
+            <label for="inputUserName" class="sr-only">Nome do Usuário</label>
+            <input name="inputUserName" class="form-control" placeholder="Nome do Usuário" required="" autofocus="">
+
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" name="inputPassword" class="form-control" placeholder="Senha" required="">
+            <!-- Fim credenciais -->
+
+            <hr />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+          <% end %>
+          <%= link_to({controller: :users, action: :new}, {class: ""}) do %>
+            Registre-se
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+
+
+	</body>
+</html>
