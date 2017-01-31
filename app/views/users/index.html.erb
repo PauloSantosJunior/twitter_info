@@ -20,19 +20,19 @@
           </div>
             <%= form_tag({controller: :users, action: :login}, {class: "form-signin", method: :get} ) do %>
 
-            <h2 class="form-signin-heading">Login</h2>
+              <h2 class="form-signin-heading">Login</h2>
 
-            <!-- Inicio credenciais-->
-            <label for="inputUserName" class="sr-only">Nome do Usuário</label>
-            <input name="inputUserName" class="form-control" placeholder="Nome do Usuário" required="" autofocus="">
+              <!-- Inicio credenciais-->
+              <label for="inputUserName" class="sr-only">Nome do Usuário</label>
+              <input name="inputUserName" class="form-control" placeholder="Nome do Usuário" required="" autofocus="">
 
-            <label for="inputPassword" class="sr-only">Senha</label>
-            <input type="password" name="inputPassword" class="form-control" placeholder="Senha" required="">
-            <!-- Fim credenciais -->
+              <label for="inputPassword" class="sr-only">Senha</label>
+              <input type="password" name="inputPassword" class="form-control" placeholder="Senha" required="">
+              <!-- Fim credenciais -->
 
-            <hr />
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-          <% end %>
+              <hr />
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <% end %>
           <%= link_to({controller: :users, action: :new}, {class: ""}) do %>
             Registre-se
           <% end %>

@@ -29,9 +29,9 @@ class TwitterInfoController < ApplicationController
       config.access_token_secret = "VHkgQaLr20HWd1ducKP35NObhKZk2buLcKrnZ6Sx33WUT"
     end
 
-    tweets = @client.search(params[:search_string].to_s, {result_type: "recent", until: params[:end_date].to_s})
+    tweets = @client.search("#{params[:search_string].to_s}", {until: params[:end_date].to_s})
 
-    tweets = tweets.select {|tweet| DateTime.parse(tweet.created_at.to_s).to_date >= Date.parse(params[:start_date].to_s)}
+  #  tweets = tweets.select {|tweet| DateTime.parse(tweet.created_at.to_s).to_date >= Date.parse(params[:start_date].to_s)}
 
     render partial: "search_results", locals: { tweets: tweets }
 
@@ -51,20 +51,12 @@ class TwitterInfoController < ApplicationController
 
     lat   = coordinates[0]
     long  = coordinates[1]
-  
-    options ={geocode: "#{lat.to_s},#{long.to_s},10km"}
-    tweets = @client.search("",geocode: "#{lat.to_s},#{long.to_s},5km", result_type: "recent")
 
-    render json: tweets.take(30)
+    tweets = @client.search("",geocode: "#{lat.to_s},#{long.to_s},5km",result_type: "recent")
+
+    tweets = tweets.select {|tweet| not tweet.place.nil?}
+
+    render json: tweets
   end
 
-  def login
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "id9ZdHDfje9k5XyynldVTAo8j"
-      config.consumer_secret     = "rcBxu93JztnplfSX7zLVTUFdzCI23YLdZtCrQ2XFfg2nk6PVgE"
-      config.access_token        = "824839316362768385-bVMRrwstfWiiVl6pjgskf5jRu8kJqTY"
-      config.access_token_secret = "VHkgQaLr20HWd1ducKP35NObhKZk2buLcKrnZ6Sx33WUT"
-    end
-    client.update("I'm tweeting with @gem!")
-  end
 end

@@ -3,8 +3,11 @@ class UsersController < ApplicationController
     @user = user(params)
     if @user
       session[:user_id] = @user.id
+      puts session[:user_id]
+      puts @user.id
       return redirect_to controller: :twitter_info, action: :index
     else
+      flash[:error] = "Usuário não encontrado."
       return redirect_to controller: :users, action: :index
     end
   end

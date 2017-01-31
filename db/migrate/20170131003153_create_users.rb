@@ -3,12 +3,12 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.string :name
       t.string :password
-      t.string :postal_code
+      t.integer :postal_code
       t.string :street_name
       t.string :city_name
       t.string :state_name
       t.string :country_name
-      t.string :telephone
+      t.integer :telephone
       t.string :email
 
       t.timestamps
