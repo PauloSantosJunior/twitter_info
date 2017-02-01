@@ -52,6 +52,16 @@
     </div>
     <div class="container">
       <div class="row">
+         <h1> Filtros:</h1>
+          <ul>
+            <li><p> Por data</p> </li>
+            <li><p> Por hashtag: #tweet</p></li>
+            <li><p> Por usuário: @usuario</p> </li>
+            <li><p> Tweet para um usuário: to:usuario</p></li>
+            <li><p> Tweet de um usuário: from:usuario</p></li>
+            <li><p> Tweet por atitude positiva: :)</p></li>
+            <li><p> Tweet por atitude positiva: :(</p></li>
+          </ul>
         <div class="col-md-12">
             <input size="16" id="start_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
             <input size="16" id="end_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
@@ -75,7 +85,9 @@
 
     </div>
     <div class="container">
-       <h1>Tweets próximo a você!</h1>
+       <h1>Filtro por proximidade e povoamento do map.<h1>
+         <h6> Arraste o Marcador no mapa, para a posição que deseja e será marcado todos os tweets em um raio de 5km da posição!</h6>
+         <h6> O nome do usuário que realizou o tweet aparece ao deixar o mouse em cima do macador, ao clicar no macador a mensage o tweet.</h6>
         <div class="row">
           <div class="col-md-6">
             <script>

@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :city_name
       t.string :state_name
       t.string :country_name
-      t.integer :telephone
+      t.integer :telephone, :limit => 8
       t.string :email
 
       t.timestamps

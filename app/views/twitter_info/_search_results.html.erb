@@ -12,7 +12,8 @@
 
     <div class="js-tweet-text-container">
       <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="pt" data-aria-label-part="0">
-        <%= tweet.text%>
+        <%# Necessário clonar a string, pois a msm é um objeto frozen%>>
+        <%= Obscenity.sanitize(String.new(tweet.text))%>
         <%Twitter::Extractor.extract_urls(tweet.text).each do |uri|%>
           <a href="<%=uri%>" class="twitter-timeline-link u-hidden" data-pre-embedded="true" dir="ltr"><%=uri%></a>
         <%end%>
