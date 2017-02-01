@@ -24,12 +24,23 @@ RSpec.describe UsersController, type: :controller do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
+    ActionController::Parameters.new(inputUserName: "Teste" , inputPassword: "12345678")
+  }
+  let(:valid_new_user){
     {
-      inputUserName:         "Teste",
-      inputPassword:     "1234578"
+      inputUserName: "Teste",
+      inputPassword: "123456789",
+      inputPostal: 7190050,
+      inputStreet: "Av. Odair Santanelli",
+      inputCity: "Guarulhos",
+      inputState: "São Paulo",
+      inputCountry: "Brasil",
+      inputTel: 5511999999999,
+      inputEmail: "teste@teste.com.br"
     }
   }
-  let(:valid_attributes_create){
+
+  let(:valid_exiting_user) {
     {
       inputUserName: "Teste",
       inputPassword: "12345678",
@@ -40,39 +51,57 @@ RSpec.describe UsersController, type: :controller do
       inputCountry: "Brasil",
       inputTel: 5511999999999,
       inputEmail: "teste@teste.com.br"
-      # name: "Teste"
-      # password: "12345678"
-      # postal_code = user_informations[:inputPostal].to_s
-      # street_name = user_informations[:inputStreet].to_s
-      # city_name = user_informations[:inputCity].to_s
-      # state_name = user_informations[:inputState].to_s
-      # country_name = user_informations[:inputCountry].to_s
-      # telephone = user_informations[:inputTel].to_s
-      # email = user_informations[:inputEmail].to_s
     }
   }
 
-  let(:invalid_attributes) {
+  let(:invalid_new_user){
+    {
+      inputUserName: "Teste",
+      inputPassword: "123456789",
+      inputPostal: 7190050,
+      inputStreet: "Av. Odair Santanelli",
+      inputCountry: "Brasil",
+      inputTel: 5511999999999,
+      inputEmail: "teste@teste.com.br"
+    }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all users as @users" do
-      #  user = User.login valid_attributes
-      #  get :index, params: {}, session: valid_session
-      #  expect(assigns(:users)).to eq([user])
+  describe "GET #login" do
+    context 'try to connect a user' do
+      it "Trying to connect a valid user" do
+        get :login, { inputUserName: "Teste" , inputPassword: "12345678", format: :html }
+        expect(response).to redirect_to controller: :twitter_info, :action => :index
+      end
+    end
+    context 'try to connect a user' do
+      it "Trying to connect a invalid user" do
+        get :login, { inputUserName: "Teste" , inputPassword: "senhainvaldia", format: :html }
+        expect(response).to redirect_to controller: :users, :action => :index
+      end
     end
   end
 
 
-  describe "GET #new" do
-    it "assigns a new user as @user" do
-      # get :new, params: {}, session: valid_session
-      # expect(assigns(:user)).to be_a_new(User)
+  describe "GET #create" do
+    context 'try to create a user' do
+      it "Trying to create a valid user" do
+        get :create, valid_new_user
+        expect(response).to redirect_to "/auth/twitter"
+      end
+      it "Trying to create a existing user" do
+        get :create, valid_exiting_user
+        expect(response).to redirect_to controller: :users, :action => :index
+      end
+    end
+    context 'try to create a user' do
+      it "Trying to create a invalid user" do
+        get :create, invalid_new_user
+        expect(response).to redirect_to controller: :users, :action => :new
+      end
     end
   end
 end

@@ -1,10 +1,8 @@
 require 'rails_helper'
-require 'active_record'
-require 'date'
+
 RSpec.describe User, type: :model do
   let(:user_test) {
     user = User.new
-    user.id = 1
     user.name = "Teste"
     user.email ="teste@teste.com.br"
     user.password     = "1234578"
@@ -14,8 +12,6 @@ RSpec.describe User, type: :model do
     user.state_name   = "São Paulo"
     user.country_name = "Brasil"
     user.telephone    = 5511999999999
-    user.created_at   = DateTime.now
-    user.updated_at   = DateTime.now
     user.save
   }
   context "Validade de um Usuário" do
@@ -30,8 +26,6 @@ RSpec.describe User, type: :model do
       user.state_name   = "São Paulo"
       user.country_name = "Brasil"
       user.telephone    = 5511999999999
-      user.created_at   = DateTime.now
-      user.updated_at   = DateTime.now
       expect(user.valid?).to be_truthy
     end
 
@@ -53,17 +47,17 @@ RSpec.describe User, type: :model do
 
   context "Válidade método Find" do
     it "Usuário cadastrado."do
-      user_informations = {inputUserName: "Teste" , inputPassword: "12345678"}
+      user_informations = ActionController::Parameters.new(inputUserName: "Teste" , inputPassword: "12345678")
       user_test = User.find(user_informations)
       expect(user_test.any?).to be_truthy
     end
     it "Usuário não cadastrado."do
-      user_informations = {inputUserName: "Testeinválido" , inputPassword: "154779"}
+      user_informations = ActionController::Parameters.new(inputUserName: "Testeinválido" , inputPassword: "154779")
       user_test = User.find(user_informations)
       expect(user_test).to be_falsey
     end
     it "Argumentos não válidos?"do
-      user_informations = {inputUserName: "Testeinválido" , inputPassword: ""}
+      user_informations = ActionController::Parameters.new(inputUserName: "Testeinválido")
       user_test = User.find(user_informations)
       expect(user_test).to be_falsey
     end

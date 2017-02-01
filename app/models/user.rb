@@ -12,9 +12,8 @@ class User < ActiveRecord::Base
 
   def self.find(user_informations)
     if user_informations.class == ActionController::Parameters
-
       return false if user_informations.empty?
-      return false if (not user_informations.has_key?("inputUserName")) and (not user_informations.has_key?("inputPassword"))
+      return false if (not user_informations.has_key?("inputUserName")) or (not user_informations.has_key?("inputPassword"))
     else
       return false
     end
@@ -22,6 +21,11 @@ class User < ActiveRecord::Base
         name: user_informations[:inputUserName],
         password: user_informations[:inputPassword]
       )
+    if user.any?
+      user
+    else
+      return false
+    end
   end
 
   def self.create(user_informations)
@@ -29,16 +33,19 @@ class User < ActiveRecord::Base
     user = User.new do |u|
       u.name = user_informations[:inputUserName].to_s
       u.password = user_informations[:inputPassword].to_s
-      u.postal_code = user_informations[:inputPostal].to_s
+      u.postal_code = user_informations[:inputPostal].to_i
       u.street_name = user_informations[:inputStreet].to_s
       u.city_name = user_informations[:inputCity].to_s
       u.state_name = user_informations[:inputState].to_s
       u.country_name = user_informations[:inputCountry].to_s
-      u.telephone = user_informations[:inputTel].to_s
+      u.telephone = user_informations[:inputTel].to_i
       u.email = user_informations[:inputEmail].to_s
     end
-    user.save
-    user
+    if user.save
+      user
+    else
+      false
+    end
 
   end
 
