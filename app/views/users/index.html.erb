@@ -18,23 +18,11 @@
               </div>
             </div>
           </div>
-            <%= form_tag({controller: :users, action: :login}, {class: "form-signin", method: :get} ) do %>
-
-              <h2 class="form-signin-heading">Login</h2>
-
-              <!-- Inicio credenciais-->
-              <label for="inputUserName" class="sr-only">Nome do Usuário</label>
-              <input name="inputUserName" class="form-control" placeholder="Nome do Usuário" required="" autofocus="">
-
-              <label for="inputPassword" class="sr-only">Senha</label>
-              <input type="password" name="inputPassword" class="form-control" placeholder="Senha" required="">
-              <!-- Fim credenciais -->
-
+            <%= form_tag('/auth/twitter', {class: "form-signin", method: :get} ) do %>
+              <h2 class="form-signin-heading">Este é o aplicativo Twitter Informations</h2>
+              <label for="inputUserName" class="sr-only">O nosso objetivo é buscar informações relevantes de tweets para você!</label>
               <hr />
-              <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-            <% end %>
-            <%= link_to({controller: :users, action: :new}, {class: ""}) do %>
-              Registre-se
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Liberar acesso ou criar uma nova conta do twitter</button>
             <% end %>
         </div>
       </div>

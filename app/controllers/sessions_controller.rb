@@ -2,9 +2,9 @@ class SessionsController < ApplicationController
 
 
   def create
-    @user = TwitterUser.find_or_create_from_auth_hash(auth_hash)
+    @user = User.find_or_create_from_auth_hash(auth_hash)
     session[:user_id] = @user.id
-    redirect_to controller: :twitter_info, action: :index
+    redirect_to controller: :users, action: :edit
   end
 
   protected

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def new
+  def edit
   end
 
   def index
@@ -24,6 +24,28 @@ class UsersController < ApplicationController
       return false
     end
   end
+
+  def update
+
+    @user = user(params)
+
+    if @user
+      flash[:error] = "Usuário já cadastrado."
+      return redirect_to controller: :users, action: :index
+    else
+      @user = User.create(params)
+      if @user
+        flash[:notice] = "Usuário cadasrado com sucesso."
+        session[:user_id] = @user.id
+        return redirect_to "/auth/twitter"
+      else
+        flash[:error] = "Tentativa de cadastro de usuário inválido."
+        return redirect_to controller: :users, action: :new
+      end
+    end
+
+  end
+
 
   def create
 

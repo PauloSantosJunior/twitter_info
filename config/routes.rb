@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       post :login
       put :login
 
+      get :edit
+      post :edit
+      put :edit
+
       get "create"
       post "create"
       put "create"
