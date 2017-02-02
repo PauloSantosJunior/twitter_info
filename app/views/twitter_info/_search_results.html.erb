@@ -1,7 +1,7 @@
 <%tweets.take(10).each do |tweet|%>
   <div class="content">
     <div class="stream-item-header">
-      <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="<%=tweet.user.url%>" data-user-id="18938394">
+      <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="<%=tweet.user.url%>">
         <img class="avatar js-action-profile-avatar" src="<%=tweet.user.profile_image_url%>" alt="">
         <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part=""><%= tweet.user.name%></strong>
         <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part="">@<b><%= tweet.user.screen_name%></b></span>

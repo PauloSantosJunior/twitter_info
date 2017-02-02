@@ -16,17 +16,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-  def login
-    @user = user(params)
-    if @user
-      session[:user_id] = @user.id
-      return redirect_to controller: :twitter_info, action: :index
-    else
-      flash[:error] = "Usuário não encontrado."
-      return redirect_to controller: :users, action: :index
-    end
-  end
   # GET /users/new
   def new
     @user = User.new
@@ -39,27 +28,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    # @user = user(params)
-    #
-    # if @user
-    #   flash[:error] = "Usuário já cadastrado."
-    #   return redirect_to controller: :users, action: :index
-    # else
-    #   @user = User.create(params)
-    #   if @user
-    #     flash[:notice] = "Usuário cadasrado com sucesso."
-    #     session[:user_id] = @user.id
-    #     return redirect_to "/auth/twitter"
-    #   else
-    #     flash[:error] = "Tentativa de cadastro de usuário inválido."
-    #     return redirect_to controller: :users, action: :new
-    #   end
-    # end
+
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user}
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -71,25 +45,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    # @user = user(params)
-    #
-    # if @user
-    #   flash[:error] = "Usuário já cadastrado."
-    #   return redirect_to controller: :users, action: :index
-    # else
-    #   @user = User.create(params)
-    #   if @user
-    #     flash[:notice] = "Usuário cadasrado com sucesso."
-    #     session[:user_id] = @user.id
-    #     return redirect_to "/auth/twitter"
-    #   else
-    #     flash[:error] = "Tentativa de cadastro de usuário inválido."
-    #     return redirect_to controller: :users, action: :new
-    #   end
-    # end
+
     respond_to do |format|
       if @user.update(user_params)
-        format.html {redirect_to(controller: :twitter_info, action: :index , notice: 'User was successfully updated.')}
+        format.html {redirect_to(controller: :twitter_info, action: :index)}
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -102,7 +61,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url}
       format.json { head :no_content }
     end
   end

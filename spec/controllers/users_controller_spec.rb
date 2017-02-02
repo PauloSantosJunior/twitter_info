@@ -204,40 +204,40 @@ RSpec.describe UsersController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
-
-  describe "GET #login" do
-    context 'try to connect a user' do
-      it "Trying to connect a valid user" do
-        get :login, { inputUserName: "Teste" , inputPassword: "12345678"}
-        expect(response).to redirect_to controller: :twitter_info, :action => :index
-      end
-    end
-    context 'try to connect a user' do
-      it "Trying to connect a invalid user" do
-        get :login, { inputUserName: "Teste" , inputPassword: "senhainvaldia"}
-        expect(response).to redirect_to controller: :users, :action => :index
-      end
-    end
-  end
-
-
-  describe "GET #create" do
-    context 'try to create a user' do
-      it "Trying to create a valid user" do
-        get :create, valid_new_user
-        expect(response).to redirect_to "/auth/twitter"
-      end
-      it "Trying to create a existing user" do
-        get :create, valid_exiting_user
-        expect(response).to redirect_to controller: :users, :action => :index
-      end
-    end
-    context 'try to create a user' do
-      it "Trying to create a invalid user" do
-        get :create, invalid_new_user
-        expect(response).to redirect_to controller: :users, :action => :new
-      end
-    end
-  end
+  # 
+  # describe "GET #login" do
+  #   context 'try to connect a user' do
+  #     it "Trying to connect a valid user" do
+  #       get :login, { inputUserName: "Teste" , inputPassword: "12345678"}
+  #       expect(response).to redirect_to controller: :twitter_info, :action => :index
+  #     end
+  #   end
+  #   context 'try to connect a user' do
+  #     it "Trying to connect a invalid user" do
+  #       get :login, { inputUserName: "Teste" , inputPassword: "senhainvaldia"}
+  #       expect(response).to redirect_to controller: :users, :action => :index
+  #     end
+  #   end
+  # end
+  #
+  #
+  # describe "GET #create" do
+  #   context 'try to create a user' do
+  #     it "Trying to create a valid user" do
+  #       get :create, valid_new_user
+  #       expect(response).to redirect_to "/auth/twitter"
+  #     end
+  #     it "Trying to create a existing user" do
+  #       get :create, valid_exiting_user
+  #       expect(response).to redirect_to controller: :users, :action => :index
+  #     end
+  #   end
+  #   context 'try to create a user' do
+  #     it "Trying to create a invalid user" do
+  #       get :create, invalid_new_user
+  #       expect(response).to redirect_to controller: :users, :action => :new
+  #     end
+  #   end
+  # end
 
 end

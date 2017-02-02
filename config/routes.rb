@@ -4,10 +4,6 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :login
-      post :login
-      put :login
-
       get :edit
       post :edit
       put :edit

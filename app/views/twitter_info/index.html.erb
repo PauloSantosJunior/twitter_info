@@ -11,42 +11,53 @@
 
   <body>
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse twitter-nav-bar">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <h4 class="white-text"> @<%= @twitter_user.screen_name%> </h4>
-    </nav>
+
     <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3"><%= @twitter_user.name%></h1>
-
-        <h2 class="form-signin-heading">Dados da Conta</h2>
-
-        <!-- Inicio credenciais-->
-        <p>Nome do usuário: <%= @user.name%></p>
-        <!-- Fim credenciais -->
-
-        <!-- Inicio endereço-->
-        <p>CEP: <%= @user.postal_code%></p>
-
-        <p>Logradouro: <%= @user.street_name%></p>
-
-        <p>Cidade: <%= @user.city_name%></p>
-
-
-        <p>Estado: <%= @user.state_name%></p>
-
-        <p>País: <%= @user.country_name%></p>
-
-
-        <!-- Fim endereço-->
-
-        <!-- inicio informações contato-->
-        <p>Telefone: <%= @user.telephone%></p>
-
-        <p>E-mail: <%= @user.email%></p>
-
+      <div class="container-fluid">
+        <div class="row nav-margin">
+          <div class="col-md-12 col-xs-12">
+            <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse twitter-nav-bar">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+                <h4 class="white-text"> @<%= @twitter_user.screen_name%> </h4>
+            </nav>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 col-xs-12">
+            <a class="img-fluid" href="<%=@twitter_user.url%>">
+              <img src="<%=@twitter_user.profile_image_url%>">
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <div class="col-md-5 col-xs-12">
+              <a href="<%=@twitter_user.url%>">
+                @<span class="tag tag-default"><%= @twitter_user.screen_name%></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 col-xs-12">
+            <ul class="nav nav-tabs nav-justified">
+              <li class="list-group-item justify-content-between">
+                <span>Tweets</span>
+                <span class="badge badge-default badge-pill" data-is-compact="false"><%= @twitter_user.tweets_count%></span>
+              </li>
+              <li class="list-group-item justify-content-between">
+                <span>Following</span>
+                <span class="badge badge-default badge-pill" data-is-compact="false"><%= @twitter_user.friends_count%></span>
+              </li>
+              <li class="list-group-item justify-content-between">
+                <span>Followers</span>
+                <span class="badge badge-default badge-pill" data-is-compact="false"><%= @twitter_user.followers_count%></span>
+              </li>
+            </ul>
+          </div>
+        </div>
         <hr />
       </div>
     </div>
@@ -140,7 +151,7 @@
     <div class="container">
        <h1>Filtro por proximidade e povoamento do map.<h1>
          <h6> Arraste o Marcador no mapa, para a posição que deseja e será marcado todos os tweets em um raio de 5km da posição!</h6>
-         <h6> O nome do usuário que realizou o tweet aparece ao deixar o mouse em cima do macador, ao clicar no macador será exibido o tweet.</h6>
+         <h6> O nome do usuário que realizou o tweet aparece ao deixar o mouse em cima do macador, ao clicar no macador será exibido o @twitter_</h6>
         <div class="row">
           <div class="col-md-12">
 	          <div id="map" class="map"></div>
