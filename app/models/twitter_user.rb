@@ -1,6 +1,7 @@
 class TwitterUser < ApplicationRecord
   validates :provider,          presence: true
   validates :name,              presence: true
+  
   def self.find_or_create_from_auth_hash(auth_hash)
     if auth_hash.class == OmniAuth::AuthHash
       # return false if auth_hash.empty?

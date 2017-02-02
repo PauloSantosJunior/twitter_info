@@ -5,17 +5,18 @@ class TwitterInfoController < ApplicationController
   require "twitter-text"
 
 
-  def init_twitter_rest
+  def init_twitter_rest(user)
     Twitter::REST::Client.new do |config|
       config.consumer_key        = Rails.application.secrets.twitter_api_key
       config.consumer_secret     = Rails.application.secrets.twitter_api_secret
-      config.access_token        = Rails.application.secrets.twitter_access_token
-      config.access_token_secret = Rails.application.secrets.twitter_access_token_secret
+      config.access_token        = user.token
+      config.access_token_secret = user.secret
     end
   end
   def index
-    @client = init_twitter_rest
+
     @user = User.find_by(id: session[:user_id]) if session[:user_id]
+    @client = init_twitter_rest(@user)
     @twitter_user = @client.user
   end
 
@@ -28,7 +29,9 @@ class TwitterInfoController < ApplicationController
       flash[:error] = "Campos de busca não pode ser vazio."
       return redirect_to controller: :twitter_info, action: :index
     end
-    @client = init_twitter_rest
+
+    @user = User.find_by(id: session[:user_id]) if session[:user_id]
+    @client = init_twitter_rest(@user)
 
     tweets = @client.search("#{params[:search_string].to_s}", { result_type: "recent", until: params[:end_date].to_s})
 
@@ -47,7 +50,8 @@ class TwitterInfoController < ApplicationController
 
     coordinates = params[:coordinates].split(',')
 
-    @client = init_twitter_rest
+    @user = User.find_by(id: session[:user_id]) if session[:user_id]
+    @client = init_twitter_rest(@user)
 
     user = @client.user
 
