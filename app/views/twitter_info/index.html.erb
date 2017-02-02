@@ -52,21 +52,48 @@
     </div>
     <div class="container">
       <div class="row">
-         <h1> Filtros:</h1>
-          <ul>
-            <li><p> Por data</p> </li>
-            <li><p> Por hashtag: #tweet</p></li>
-            <li><p> Por usuário: @usuario</p> </li>
-            <li><p> Tweet para um usuário: to:usuario</p></li>
-            <li><p> Tweet de um usuário: from:usuario</p></li>
-            <li><p> Tweet por atitude positiva: :)</p></li>
-            <li><p> Tweet por atitude positiva: :(</p></li>
-          </ul>
+        <table class="table table-bordered">
+          <thead>
+            <th>Filtros:</th>
+            <th>Exemplo/Instruções:</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data:</td>
+              <td>Basta cliclar nas datas a cima e definir um período</td>
+            </tr>
+            <tr>
+              <td>Hashtag:</td>
+              <td>#tweet</td>
+            </tr>
+            <tr>
+              <td>Usuário:</td>
+              <td>@usuario</td>
+            </tr>
+            <tr>
+              <td>Tweet para um usuário:</td>
+              <td>to:usuario</td>
+            </tr>
+            <tr>
+              <td>Tweet de um usuário:</td>
+              <td>from:usuario</td>
+            </tr>
+            <tr>
+              <td>Tweet por atitude positiva:</td>
+              <td>:)</td>
+            </tr>
+            <tr>
+              <td>Tweet por atitude positiva:</td>
+              <td>:(</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
         <div class="col-md-12">
-            <input size="16" id="start_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
-            <input size="16" id="end_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
-            <input id="search_string" class="form-control mr-sm-10" type="text" placeholder="Search">
-            <button class="btn btn-success my-2 my-sm-0" onclick="get_search_result()">Tweets Search</button>
+          <input size="16" id="start_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
+          <input size="16" id="end_date" type="text" value="<%=Date.strptime(Date.today.to_s, '%Y-%m-%d')%>" class="form_datetime">
+          <input id="search_string" class="form-control mr-sm-10" type="text" placeholder="Search">
+          <button class="btn btn-success my-2 my-sm-0" onclick="get_search_result()">Tweets Search</button>
         </div>
       </div>
 
@@ -81,8 +108,6 @@
         </div>
       </div>
 
-      <hr>
-
     </div>
     <div class="container">
        <h1>Filtro por proximidade e povoamento do map.<h1>
@@ -90,49 +115,6 @@
          <h6> O nome do usuário que realizou o tweet aparece ao deixar o mouse em cima do macador, ao clicar no macador a mensage o tweet.</h6>
         <div class="row">
           <div class="col-md-6">
-            <script>
-              var map;
-              function show_map(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-                // Create a map object and specify the DOM element for display.
-                map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: latitude, lng: longitude},
-                  scrollwheel: true,
-                  zoom: 16
-                });
-                var infowindow = new google.maps.InfoWindow({});
-
-                var marker = new google.maps.Marker({
-                  position: {lat: latitude, lng: longitude},
-                  map: map,
-                  label: "Você",
-                  icon: "",
-                  draggable: true,
-                  title: 'Mostrará todos os tweets em um raio de 5km, apartir da sua posição.'
-                });
-                marker.addListener('click', function() {
-                   infowindow.open(map, marker);
-                 });
-
-                google.maps.event.addListener(marker, 'dragend', function(evt){
-                  get_geo_tweets(evt.latLng.lat()+','+evt.latLng.lng());
-                  infowindow.setOptions({
-                      content: '<p>Mostrará todos os tweets em um raio de 5km, apartir da sua posição.</p><p>Aguarde!</p>'
-                  });
-                  infowindow.open(map, marker);
-                });
-
-                google.maps.event.addListener(marker, 'drag', function(evt){
-                    console.log("marker is being dragged");
-                });
-
-              }
-
-              navigator.geolocation.getCurrentPosition(show_map);
-
-
-            </script>
             <div style="width:1000px; height:800px;">
                 <div id="map" style="width: 100%; height: 100%"></div>
             </div>
@@ -141,32 +123,3 @@
     </div>
   </body>
 </html>
-<script>
-  function get_search_result(){
-    $.get('/twitter_info/twitter_search?search_string='+$("#search_string").val().replace('#', "%23")+"&start_date="+$("#start_date").val()+"&end_date="+$("#end_date").val(), function(data) {
-        $("#search-results").html(data);
-     });
-  }
-  function get_geo_tweets(coordinates){
-    $.get('/twitter_info/twitter_geo_location?coordinates='+coordinates, function(tweets) {
-      tweets.forEach(function(tweet){
-        // alert(tweet.place.bounding_box.coordinates[0][0][1]);
-        // alert( tweet.place.bounding_box.coordinates[0][0][0]);
-        var infowindow = new google.maps.InfoWindow({
-            content: '<p>'+tweet.text+'</p>'
-        });
-        var marker = new google.maps.Marker({
-          position: {lat: tweet.place.bounding_box.coordinates[0][0][1], lng:  tweet.place.bounding_box.coordinates[0][0][0]},
-          map: map,
-          label: "",
-          draggable: true,
-          title: tweet.user.screen_name
-        });
-        marker.addListener('click', function() {
-           infowindow.open(map, marker);
-         });
-      });
-     });
-  }
-  $(".form_datetime").datetimepicker({format: 'YYYY-MM-DD'});
-</script>
