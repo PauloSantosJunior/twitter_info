@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     else
       return false
     end
-    user = where(provider: auth_hash.provider, twuid: auth_hash.twuid).first_or_create(auth_hash)
+    user = where(provider: auth_hash.provider, twuid: auth_hash.uid).first_or_create(auth_hash)
     user.update(
       name: auth_hash.info.nickname,
       profile_image: auth_hash.info.image,
@@ -36,14 +36,14 @@ class User < ActiveRecord::Base
   end
 
   def self.create(auth_hash)
-
     user = User.new do |u|
-      u.twuid         = auth_hash.twuid,
-      u.name          = auth_hash.info.nickname,
-      u.profile_image = auth_hash.info.image,
-      u.token         = auth_hash.credentials.token,
+      u.twuid         = auth_hash.uid
+      u.name          = auth_hash.info.nickname
+      u.profile_image = auth_hash.info.image
+      u.token         = auth_hash.credentials.token
       u.secret        = auth_hash.credentials.secret
     end
+
     if user.save
       user
     else
