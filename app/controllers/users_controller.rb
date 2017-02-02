@@ -16,10 +16,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
+
   def login
     @user = user(params)
     if @user
@@ -92,8 +89,7 @@ class UsersController < ApplicationController
     # end
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.html {redirect_to(controller: :twitter_info, action: :index , notice: 'User was successfully updated.')}
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }

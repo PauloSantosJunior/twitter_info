@@ -11,72 +11,99 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :name, {class: "cols-sm-2 control-label"} %>
+
+    </div>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+        <%= f.text_field :name, {class: "form-control", placeholder: "Enter your Name"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :provider %>
-    <%= f.text_field :provider %>
-  </div>
 
   <div class="field">
     <%= f.label :profile_image %>
     <%= f.text_field :profile_image %>
   </div>
 
-  <div class="field">
-    <%= f.label :token %>
-    <%= f.text_field :token %>
+  <div class="form-group">
+    <%= f.label :postal_code, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+        <%= f.number_field :postal_code, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :secret %>
-    <%= f.text_field :secret %>
+  <div class="form-group">
+    <%= f.label :street_name, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-road" aria-hidden="true"></i></span>
+        <%= f.text_field :street_name, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :twuid %>
-    <%= f.text_field :twuid %>
+  <div class="form-group">
+    <%= f.label :city_name, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></span>
+        <%= f.text_field :city_name, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :postal_code %>
-    <%= f.number_field :postal_code %>
+  <div class="form-group">
+    <%= f.label :state_name, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-map" aria-hidden="true"></i></span>
+        <%= f.text_field :state_name, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :street_name %>
-    <%= f.text_field :street_name %>
+  <div class="form-group">
+    <%= f.label :country_name, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-flag-o" aria-hidden="true"></i></span>
+        <%= f.text_field :country_name, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :city_name %>
-    <%= f.text_field :city_name %>
+  <div class="form-group">
+    <%= f.label :telephone, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+        <%= f.telephone_field :telephone, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :state_name %>
-    <%= f.text_field :state_name %>
+  <div class="form-group">
+    <%= f.label :email, {class: "cols-sm-2 control-label"} %>
+    <div class="cols-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+        <%= f.email_field :email, {class: "form-control", placeholder: "Enter your Email"} %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :country_name %>
-    <%= f.text_field :country_name %>
+  <div class="form-group ">
+    <div class="actions">
+      <%= f.submit 'Update', {class: "btn btn-primary btn-lg btn-block login-button"} %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :telephone %>
-    <%= f.number_field :telephone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

@@ -1,6 +1,19 @@
-<h1>Editing User</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Twitter Info',controller: :twitter_info, action: :index %>
+		<!-- Google Fonts -->
+		<title>Twitter Info submit form</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+				<h5>Sign up once and watch any of our free demos.</h5>
+          <%= render 'form', user: @user %>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

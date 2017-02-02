@@ -69,6 +69,8 @@ GEM
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.17)
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     google_maps_service (0.4.2)
@@ -246,6 +248,7 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails
   byebug
   coffee-rails (~> 4.2)
+  font-awesome-rails
   google_maps_service
   jbuilder (~> 2.5)
   jquery-rails
